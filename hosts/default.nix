@@ -11,14 +11,14 @@ let
   lib = nixpkgs.lib;
 in
 {
-  vm = lib.nixosSystem {
+  vm-nox = lib.nixosSystem {
     inherit system;
     specialArgs = {
       inherit inputs user location;
       host.hostName = "vm-mini";
     };
     modules = [
-      ./vm
+      ./vm-nox
       ./configuration.nix
 
       home-manager.nixosModules.home-manager {
@@ -29,7 +29,7 @@ in
           host.hostName = "vm-mini";
         };
         home-manager.users.${user} = {
-          imports = [(import ./home.nix)] ++ [(import ./vm/home.nix)];
+          imports = [(import ./home.nix)] ++ [(import ./vm-nox/home.nix)];
         };
       }
     ];
