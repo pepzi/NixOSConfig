@@ -8,29 +8,56 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      flake = false;
-    };
-
-    doom-emacs = {
-      url = "github:nix-community/nix-doom-emacs";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.emacs-overlay.follows = "emacs-overlay";
-    };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, doom-emacs, ... }: 
+  outputs = { nixpkgs, home-manager, ...}@inputs:
     let
-      user = "robert";
-      location = "$HOME/.setup";
+      inherit (nixpkgs) lib;
+
+      util = import ./lib {
+        inherit system pkgs home-manager lib; overlays = (pkgs.overlays);
+      };
+
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [];
+      };
+
+      system = "x86_64-linux";
+
     in {
-      nixosConfigurations = (
-        import ./hosts {
-          inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager user location doom-emacs;
-        }
-      );
+      homeManagerConfigurations = {
+        robert = user.mkHMUser {
+	  userConfig = {
+	    git.enable = true;
+	  };
+       };
+     };
+
+      nixosConfigurations = {
+        i9 = host.mkHost {
+          name = "i9";
+	  NICs = [ "enp4s0" ];
+	  kernelPackage = pkgs.linuxPackages;
+	  initrdMods = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+	  kernelMods = [ "kvm-intel" ];
+	  kernelParams = [];
+	  systemConfig = {
+            # your abstracted system config
+          };
+	  users = [{
+	    name = "robert";
+	    groups = [ "wheel" "networkmanager" "video" ];
+	    uid = 1000;
+	    shell = pkgs.bash;
+	  }];
+	  cpuCores = 10;
+
+        };
+        #vboxnox = host.mkHost {
+          # ...
+        #};
+      };
     };
 }
