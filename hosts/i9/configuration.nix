@@ -17,7 +17,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  networking.hostName = "nixos"; # Define your hostname.
+  boot.supportedFilesystems = [ "ntfs" ];
+
+  networking.hostName = "nixos-i9"; # Define your hostname.
 
   networking.networkmanager.enable = true;
 
