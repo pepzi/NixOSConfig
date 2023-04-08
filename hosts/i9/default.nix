@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, user, se_a5, ... }:
 {
   imports = [
     ./configuration.nix

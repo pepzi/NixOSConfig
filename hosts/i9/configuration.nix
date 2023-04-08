@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, user, se_a5, ... }:
 
   
 {
@@ -39,13 +39,22 @@
     LC_TIME = "sv_SE.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-#  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver = {
+    enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+    displayManager.sddm.enable = true;
+    desktopManager.plasma5.enable = true;
+
+    # videoDrivers = [ "nvidia" ];
+
+    extraLayouts.se_a5 =  {
+      description = "Swedish A5";
+      languages = [ "swe" ];
+      symbolsFile = se_a5;
+    };
+
+    layout = "se_a5";
+  };
 
 
   # Configure console keymap
