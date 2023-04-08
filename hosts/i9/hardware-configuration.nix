@@ -5,13 +5,29 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+   [ (modulesPath + "/installer/scan/not-detected.nix")
+   ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+   boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
+
+   # These modules are required for PCI passthrough, and must come before early modesetting stuff
+   boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ]; # "xhci_pci" ];
+   boot.extraModprobeConfig = "options vfio-pci ids=10de:2206,10de:1aef,1987:5012}";
+
+   boot.blacklistedKernelModules = [ "nvidia" "nvidiafb" "nouveau" "nvme" ];
+
+  #  environment.systemPackages = with pkgs; [
+  #    virtmanager
+  #    qemu
+  #    pciutils
+  #    looking-glass-client
+  #  ];
+
+  #  virtualisation.libvirtd.enable = true;
+  #  virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
+  #  virtualisation.libvirtd.qemu.runAsRoot = false;
+
+    users.groups.libvirtd.members = [ "root" "robert" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/135a6521-ddb6-42d7-83a4-629de0608a3c";
@@ -25,18 +41,13 @@
 
   swapDevices = [ ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.opengl.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  hardware.nvidia.modesetting.enable = true;
+  #hardware.opengl.enable = true;
+  #hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #hardware.nvidia.modesetting.enable = true;
 }

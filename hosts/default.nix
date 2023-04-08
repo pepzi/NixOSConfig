@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, home-manager, user, location, doom-emacs, ... }:
+{ lib, inputs, nixpkgs, user, location, ... }:
 
 let
   system = "x86_64-linux";
@@ -11,27 +11,14 @@ let
   lib = nixpkgs.lib;
 in
 {
-  vm-nox = lib.nixosSystem {
+  i9 = lib.nixosSystem {
     inherit system;
     specialArgs = {
       inherit inputs user location;
-      host.hostName = "vm-mini";
+      host.hostName = "i9";
     };
     modules = [
-      ./vm-nox
-      ./configuration.nix
-
-      home-manager.nixosModules.home-manager {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = {
-          inherit user doom-emacs;
-          host.hostName = "vm-mini";
-        };
-        home-manager.users.${user} = {
-          imports = [(import ./home.nix)] ++ [(import ./vm-nox/home.nix)];
-        };
-      }
+      ./i9
     ];
   };
 }
