@@ -1,10 +1,5 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+{ config, pkgs, se_a5, ... }:
 
-{ config, pkgs, user, se_a5, ... }:
-
-  
 {
   imports =
     [ 
@@ -12,21 +7,17 @@
       ./vm.nix
     ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   boot.supportedFilesystems = [ "ntfs" ];
 
-  networking.hostName = "nixos-i9"; # Define your hostname.
-
+  networking.hostName = "nixos-i9";
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "Europe/Stockholm";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -58,14 +49,10 @@
     layout = "se_a5";
   };
 
+  console.keyMap = "sv-latin1";
 
-  # Configure console keymap
-  #console.keyMap = "sv-latin1";
-
-  # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -74,12 +61,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   users.users.robert = {
@@ -87,10 +68,8 @@
     description = "Robert";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     packages = with pkgs; [
-      firefox
-      google-chrome
-      tmux
-      qbittorrent
+      firefox google-chrome
+      tmux vscode qbittorrent
     ];
   };
 
@@ -98,15 +77,11 @@
   security.doas.wheelNeedsPassword = false;
   security.sudo.wheelNeedsPassword = false;
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-   vim
-   wget file htop btop
-   git gh gnupg
-   unzip zip rar
-   pinentry-curses
+   vim wget file htop btop git gh gnupg
+   unzip zip rar pinentry-curses pciutils
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -119,9 +94,8 @@
 
   programs.dconf.enable = true;
   programs.steam.enable = true;
-  # List services that you want to enable:
 
   services.openssh.enable = true;
 
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "22.11";
 }
