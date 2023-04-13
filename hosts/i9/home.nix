@@ -13,5 +13,8 @@
 
         alacritty
 	vscode
+
+	plover.dev
     ];
 }
+
