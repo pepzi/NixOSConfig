@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, home-manager, ... }:
+{ lib, inputs, nixpkgs, system, home-manager, user, ... }:
 
 let
   se_a5 = pkgs.writeText "se-a5" ''
@@ -63,7 +63,7 @@ let
   };
 '';
 
-  system = "x86_64-linux";
+  
 
   pkgs = import nixpkgs {
     inherit system;
@@ -76,10 +76,21 @@ in
   i9 = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs se_a5 home-manager;
+      inherit inputs user se_a5;
     };
     modules = [
       ./i9
+      ./configuration.nix # For each machine!
+
+      home-manager.nixosModules.home-manager {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = { inherit user; };
+        home-manager.users.${user} = {
+          home.stateVersion = "22.11";
+          imports = [ (import ./home.nix) ] ++ [(import ./i9/home.nix)];
+        };
+      }
     ];
   };
 }

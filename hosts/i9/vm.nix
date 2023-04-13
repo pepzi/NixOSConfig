@@ -8,6 +8,10 @@
   # Add user to libvirtd group
   users.users.robert.extraGroups = [ "libvirtd" "qemu-libvirtd" ];
 
+  environment.variables = {
+    LIBVIRT_DEFAULT_URI = "qemu:///system";
+  };
+
   # Install necessary packages
   environment.systemPackages = with pkgs; [
     virt-manager
