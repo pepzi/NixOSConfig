@@ -15,6 +15,7 @@
 	vscode
 
 	plover.dev
+	oh-my-fish
     ];
 }
 

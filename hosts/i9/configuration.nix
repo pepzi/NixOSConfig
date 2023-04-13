@@ -92,6 +92,7 @@
 
   programs.dconf.enable = true;
   programs.steam.enable = true;
+  programs.fish.enable = true;
 
   system.stateVersion = "22.11";
 }
