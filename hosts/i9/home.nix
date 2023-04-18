@@ -22,6 +22,11 @@
 	tmux
   ];
 
+  home.file.".config/alacritty".source = ./configs/alacritty;
+  home.file.".config/sway".source = ./configs/sway;
+  home.file.".config/swaynag".source = ./configs/swaynag;
   home.file.".config/waybar".source = ./configs/waybar;
+  home.file.".config/wofi".source = ./configs/wofi;
+  home.file.".config/vimrc".source = ./configs/vimrc;
 }
 
