@@ -23,6 +23,7 @@
   ];
 
   home.file.".config/alacritty".source = ./configs/alacritty;
+  home.file.".config/tmux".source = ./configs/tmux;
   home.file.".config/sway".source = ./configs/sway;
   home.file.".config/swaynag".source = ./configs/swaynag;
   home.file.".config/waybar".source = ./configs/waybar;
