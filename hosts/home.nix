@@ -2,8 +2,10 @@
 
 {
     home = {
-        username = "${user}";
-        homeDirectory = "/home/${user}";
+        username = "robert";
+        homeDirectory = "/home/robert";
+
+	stateVersion = "22.11";
 
         packages = with pkgs; [
             # Terminal
@@ -15,6 +17,7 @@
             
             # File Management
             unzip
+	    discord
             unrar
         ];
     };

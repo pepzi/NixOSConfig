@@ -4,7 +4,8 @@
   imports =
     [ ./hardware-configuration.nix
       ./vm.nix
-      ../../modules/desktop/plasma
+#      ../../modules/desktop/plasma
+      ../../modules/desktop/sway
 #      ../../modules/desktop/bspwm
     ];
 
@@ -82,7 +83,20 @@
     zip 
     rar 
     pinentry-curses 
+    binutils
+    patchelf
+    remote-utilities-viewer
   ];
+
+  fonts.fonts = with pkgs; [
+    source-code-pro
+    font-awesome
+    fira-code
+    fira-code-symbols
+    nerdfonts
+    roboto
+  ];
+
 
   programs.gnupg.agent = {
     enable = true;

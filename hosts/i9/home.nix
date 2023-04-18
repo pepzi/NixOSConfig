@@ -14,8 +14,14 @@
         alacritty
 	vscode
 
+	binutils
+
 	plover.dev
 	oh-my-fish
-    ];
+
+	tmux
+  ];
+
+  home.file.".config/waybar".source = ./configs/waybar;
 }
 
