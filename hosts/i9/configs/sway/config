@@ -100,6 +100,13 @@ input "type:pointer" accel_profile flat
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    # Suspend computer
+    bindsym $mod+Shift+s exec systemctl suspend
+
+    # Start win10 and looking-glass-client
+    bindsym $mod+Ctrl+Shift+w exec /home/robert/start_win10.sh
+
 #
 # Moving around:
 #
