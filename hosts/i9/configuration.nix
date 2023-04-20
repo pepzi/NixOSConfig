@@ -85,7 +85,7 @@
     pinentry-curses 
     binutils
     patchelf
-    remote-utilities-viewer
+    # remote-utilities-viewer
   ];
 
   fonts.fonts = with pkgs; [

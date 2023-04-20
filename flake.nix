@@ -2,7 +2,7 @@
   description = "NixOS System Flake Configuration";
 
   inputs = {
-    nixpkgs.url = github:pepzi/nixpkgs/nixos-unstable;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };

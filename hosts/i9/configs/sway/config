@@ -16,7 +16,7 @@ gaps outer 0px
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod1
+set $mod Mod4
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -107,6 +107,8 @@ input "type:pointer" accel_profile flat
     # Start win10 and looking-glass-client
     bindsym $mod+Ctrl+Shift+w exec /home/robert/start_win10.sh
 
+    # Screenshots
+    bindsym $mod+c exec grim -g "$(slurp)" /tmp/$(date + '%H:%M:%S.png')
 #
 # Moving around:
 #
@@ -219,6 +221,11 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# From https://nixos.wiki/wiki/Sway
+exec dbus-sway-environment
+exec configure-gtk
+exec mako
 
 #
 # Status Bar:

@@ -13,6 +13,8 @@
 
         alacritty
 	vscode
+	freecad
+	blender
 
 	binutils
 
@@ -21,6 +23,11 @@
 
 	tmux
   ];
+
+  services.mako = {
+    enable = true;
+    defaultTimeout = 4000;
+  };
 
   home.file.".config/alacritty".source = ./configs/alacritty;
   home.file.".config/tmux".source = ./configs/tmux;
