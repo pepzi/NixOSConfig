@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, system, home-manager, user, ... }:
+{ lib, inputs, nixpkgs, system, home-manager, user, nix-doom-emacs, ... }:
 
 let
   se_a5 = pkgs.writeText "se-a5" ''
@@ -88,7 +88,7 @@ in
         home-manager.extraSpecialArgs = { inherit user; };
         home-manager.users.${user} = {
           home.stateVersion = "22.11";
-          imports = [ (import ./home.nix) ] ++ [(import ./i9/home.nix)];
+          imports = [ nix-doom-emacs.hmModule (import ./home.nix) ] ++ [(import ./i9/home.nix)];
         };
       }
     ];

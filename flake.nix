@@ -5,9 +5,10 @@
     nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, ... }: 
+  outputs = inputs @ { self, nixpkgs, home-manager, nix-doom-emacs, ... }: 
   let
     user = "robert";
     system = "x86_64-linux";
@@ -17,7 +18,7 @@
     nixosConfigurations = (
       import ./hosts {
         inherit (nixpkgs) lib;
-        inherit nixpkgs inputs user system home-manager;
+        inherit nixpkgs inputs user system home-manager nix-doom-emacs; 
       }
     );
   };

@@ -8,10 +8,16 @@ input "type:keyboard" {
   xkb_layout se_a5
 }
 
-font pango: SourceCodePro Medium 14
+#font pango: SourceCodePro Medium 14
 
 gaps inner 5px
 gaps outer 0px
+
+default_border none
+default_floating_border none
+font pango:monospace 0
+titlebar_padding 1
+titlebar_border_thickness 0
 
 ### Variables
 #

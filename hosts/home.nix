@@ -1,4 +1,4 @@
-{ config, lib, pkgs, user, ... }:
+{ config, lib, pkgs, nix-doom-emacs, user, ... }:
 
 {
     home = {
@@ -26,9 +26,14 @@
 
     nixpkgs.config.allowUnfree = true;
 
-    programs = {
-        home-manager.enable = true;
-    };
+#    imports = [ nix-doom-emacs.hmModule ];
 
+    programs = {
+      home-manager.enable = true;
+      doom-emacs = {
+	enable = true;
+	doomPrivateDir = ./dotfiles/doom.d;
+      };
+    };
 
 }

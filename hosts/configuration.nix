@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, user, ... }:
+{ config, lib, pkgs, inputs, user, nix-doom-emacs, ... }:
 
 { 
     time.timeZone = "Europe/Stockholm";
