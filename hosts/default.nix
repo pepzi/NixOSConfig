@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, system, home-manager, user, nix-doom-emacs, ... }:
+{ lib, inputs, nixpkgs, system, home-manager, user, nix-doom-emacs, nixos-hardware, ... }:
 
 let
   se_a5 = pkgs.writeText "se-a5" ''
@@ -80,7 +80,7 @@ in
     };
     modules = [
       ./i9
-      ./configuration.nix # For each machine!
+      ./configuration.nix # Global configuration for every host
 
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
@@ -89,6 +89,27 @@ in
         home-manager.users.${user} = {
           home.stateVersion = "22.11";
           imports = [ nix-doom-emacs.hmModule (import ./home.nix) ] ++ [(import ./i9/home.nix)];
+        };
+      }
+    ];
+  };
+  surface = lib.nixosSystem {
+    inherit system;
+    specialArgs = {
+      inherit inputs user se_a5 nixos-hardware;
+    };
+    modules = [
+      ./surface
+      ./configuration.nix # Global configuration for every host
+      nixos-hardware.nixosModules.microsoft-surface-pro-intel
+
+      home-manager.nixosModules.home-manager {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = { inherit user; };
+        home-manager.users.${user} = {
+          home.stateVersion = "22.11";
+          imports = [ (import ./home.nix) ] ++ [(import ./surface/home.nix)];
         };
       }
     ];

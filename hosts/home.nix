@@ -11,6 +11,7 @@
             # Terminal
             btop
             pfetch      # minimal fetch
+	    pv		# pipe viewer
 
             # Apps
             google-chrome
