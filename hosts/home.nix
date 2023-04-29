@@ -10,8 +10,9 @@
         packages = with pkgs; [
             # Terminal
             btop
-            pfetch      # minimal fetch
+            # pfetch      # minimal fetch
 	    pv		# pipe viewer
+	    fzf
 
             # Apps
             google-chrome
@@ -31,10 +32,10 @@
 
     programs = {
       home-manager.enable = true;
-      doom-emacs = {
-	enable = true;
-	doomPrivateDir = ./dotfiles/doom.d;
-      };
+#      doom-emacs = {
+#	enable = true;
+#	doomPrivateDir = ./dotfiles/doom.d;
+#      };
     };
 
 }
