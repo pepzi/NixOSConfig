@@ -42,6 +42,13 @@
     };
   };
 
+  modules = {
+    hardware = {
+	razer.enable = true;
+      };
+    };
+
+
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -111,7 +118,6 @@
     nerdfonts
     roboto
   ];
-
 
   programs.gnupg.agent = {
     enable = true;
