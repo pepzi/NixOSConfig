@@ -30,10 +30,10 @@
 
     programs = {
       home-manager.enable = true;
-      doom-emacs = {
-	enable = true;
-	doomPrivateDir = ./dotfiles/doom.d;
-      };
+      #doom-emacs = {
+        #enable = true;
+	#doomPrivateDir = ./dotfiles/doom.d;
+      #};
     };
 
 }
