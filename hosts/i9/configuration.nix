@@ -22,7 +22,7 @@
   };
 
   networking = {
-    hostName = "nixos-i9";
+    hostName = "i9";
     networkmanager.enable = true;
   };
 
