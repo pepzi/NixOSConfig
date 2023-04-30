@@ -22,7 +22,7 @@
   };
 
   networking = {
-    hostName = "nixos-i9";
+    hostName = "i9";
     networkmanager.enable = true;
   };
 
@@ -49,6 +49,7 @@
   services = {
     printing.enable = true;
     openssh.enable = true;
+    openssh.settings.permitRootLogin = "yes";
 
     pipewire = {
       enable = true;
@@ -110,6 +111,7 @@
     fira-code-symbols
     nerdfonts
     roboto
+    emacs-all-the-icons-fonts
   ];
 
 

@@ -1,2 +1,67 @@
 #!/usr/bin/env bash
-sudo nixos-rebuild --flake .#i9 switch
+set -e
+
+
+all_hosts=(
+    "i9"
+    "surface"
+)
+
+
+# commands-line interface
+print_help () {
+    pname="$(basename "${0}")"
+
+    echo "${pname} - Rebuild NixOS configuration and switch to it"
+    echo ""
+    echo "USAGE:"
+    echo "  ${pname} hostname"
+    echo ""
+    echo "FLAGS:"
+    echo "  -h, --help          Prints this help message"
+    echo ""
+    echo "Available hostnames are:"
+    for c in "${all_hosts[@]}"; do
+      echo "    ${c}"
+    done
+}
+
+hosts=()
+
+while [[ ${#} -gt 0 ]]; do
+    key="${1}"
+
+    case "${key}" in
+        -h|--help)
+            print_help
+            exit
+            ;;
+
+        *)
+            hosts+=("${1}")
+            shift
+            ;;
+    esac
+done
+
+# ensure some component is selected
+if [[ ${#hosts[@]} -eq 0 ]]; then
+    print_help
+    exit 1
+fi
+
+for c in "${hosts[@]}"; do
+    if [[ ! " ${all_hosts[*]} " =~ " ${c} " ]]; then
+        echo "Error: Unknown hostname '${c}'"
+        echo "       Run with '--help' for more information."
+        exit 1
+    fi
+done;
+
+if [[ " ${hosts[*]} " =~ " i9 " ]]; then
+  sudo nixos-rebuild --flake .#i9 switch
+fi
+
+if [[ " ${hosts[*]} " =~ " surface " ]]; then
+  sudo nixos-rebuild --flake .#surface switch
+fi

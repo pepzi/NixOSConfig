@@ -72,8 +72,6 @@
     printing.enable = true;
     openssh.enable = true;
 
-    #iptsd.enable = true;
-
     pipewire = {
       enable = true;
       alsa.enable = true;

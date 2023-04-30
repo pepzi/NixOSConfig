@@ -1,4 +1,4 @@
-{ config, lib, pkgs, user, ... }:
+{ config, lib, pkgs, user, home-manager, ... }:
 
 {
     home.packages = with pkgs; [
@@ -22,12 +22,32 @@
 	oh-my-fish
 
 	tmux
+	emacs
+
+	# doom dependencies
+	binutils       # native-comp needs 'as', provided by this
+
+	git
+	(ripgrep.override {withPCRE2 = true;})
+	gnutls              # for TLS connectivity
+
+	## Optional dependencies
+	fd                  # faster projectile indexing
+	#imagemagick         # for image-dired
+        pinentry_emacs   # in-emacs gnupg prompts
+        zstd                # for undo-fu-session/undo-tree compression
+	shellcheck
   ];
 
   services.mako = {
     enable = true;
     defaultTimeout = 4000;
   };
+
+  home.sessionPath = 
+    [
+      "~/.config/emacs/bin"
+    ];
 
   home.file.".config/alacritty".source = ./configs/alacritty;
   home.file.".config/tmux".source = ./configs/tmux;

@@ -62,6 +62,7 @@
             xterm
             wget 
             file 
+	    cached-nix-shell
         ];
     };
 }
