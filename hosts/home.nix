@@ -1,41 +1,21 @@
-{ config, lib, pkgs, nix-doom-emacs, user, ... }:
+{ config, lib, ... }:
 
+with builtins;
+with lib;
 {
-    home = {
-        username = "robert";
-        homeDirectory = "/home/robert";
+  time.timeZone = "Europe/Stockholm";
 
-	stateVersion = "22.11";
+  i18n.defaultLocale = "en_US.UTF-8";
 
-        packages = with pkgs; [
-            # Terminal
-            btop
-            # pfetch      # minimal fetch
-	    pv		# pipe viewer
-	    fzf
-
-            # Apps
-            google-chrome
-            
-            # File Management
-            unzip
-	    discord
-            unrar
-
-	    irssi
-        ];
-    };
-
-    nixpkgs.config.allowUnfree = true;
-
-#    imports = [ nix-doom-emacs.hmModule ];
-
-    programs = {
-      home-manager.enable = true;
-#      doom-emacs = {
-#	enable = true;
-#	doomPrivateDir = ./dotfiles/doom.d;
-#      };
-    };
-
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "sv_SE.UTF-8";
+    LC_IDENTIFICATION = "sv_SE.UTF-8";
+    LC_MEASUREMENT = "sv_SE.UTF-8";
+    LC_MONETARY = "sv_SE.UTF-8";
+    LC_NAME = "sv_SE.UTF-8";
+    LC_NUMERIC = "sv_SE.UTF-8";
+    LC_PAPER = "sv_SE.UTF-8";
+    LC_TELEPHONE = "sv_SE.UTF-8";
+    LC_TIME = "sv_SE.UTF-8";
+  };
 }
