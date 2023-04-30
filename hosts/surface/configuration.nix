@@ -3,9 +3,9 @@
 {
   imports =
     [ ./hardware-configuration.nix
-#      ./vm.nix
-#      ../../modules/desktop/plasma
-      ../../modules/desktop/sway
+      ./vm.nix
+      ../../modules/desktop/plasma
+#      ../../modules/desktop/sway
 #      ../../modules/desktop/bspwm
     ];
 
@@ -49,7 +49,24 @@
 
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  hardware.bluetooth.enable = true;
   security.rtkit.enable = true;
+
+  systemd.services = {
+    iptsd = {
+#      enable = true;
+#      description = "Intel Precise Touch & Stylus Daemon";
+#      documentation = [ "https://github.com/linux-surface/iptsd" ];
+#      after = [ "dev-ipts-0.device" ];
+#      wants = [ "dev-ipts-0.device" ];
+#      wantedBy = [ "multi-user.target" ];
+#      serviceConfig.Type = "simple";
+#      path = [ pkgs.iptsd ];
+      script = ''
+        iptsd $(iptsd-find-hidraw)
+      '';
+    };
+  };
 
   services = {
     printing.enable = true;
@@ -73,6 +90,7 @@
     };
 
     layout = "se_a5";
+    xkbOptions = "caps:swapescape";
   };
 
 
@@ -106,6 +124,9 @@
     binutils
     patchelf
     # remote-utilities-viewer
+
+    # surface things
+    iptsd
   ];
 
   fonts.fonts = with pkgs; [

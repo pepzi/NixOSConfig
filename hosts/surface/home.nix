@@ -22,6 +22,11 @@
 	oh-my-fish
 
 	tmux
+
+	# linux-surface things
+	dmidecode
+	tree
+	
   ];
 
   services.mako = {
