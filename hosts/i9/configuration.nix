@@ -46,6 +46,10 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
+  services.mullvad-vpn.enable = true;
+
+  networking.iproute2.enable = true; 
+
   services = {
     printing.enable = true;
     openssh.enable = true;
@@ -92,6 +96,8 @@
 
   environment.systemPackages = with pkgs; [
     htop 
+    wireguard-tools
+    mullvad-vpn
     btop 
     gh 
     gnupg
@@ -102,6 +108,7 @@
     binutils
     patchelf
     # remote-utilities-viewer
+    nixfmt
   ];
 
   fonts.fonts = with pkgs; [

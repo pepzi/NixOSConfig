@@ -89,10 +89,10 @@ input "type:pointer" accel_profile flat
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu-run
+    bindsym $mod+d exec $menu-drun
 
-    # Start your launcher in drun-mode
-    bindsym $mod+Shift+d exec $menu-drun
+    # Start your launcher in run-mode
+    bindsym $mod+Shift+d exec $menu-run
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
