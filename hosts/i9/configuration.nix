@@ -26,6 +26,7 @@
     networkmanager.enable = true;
   };
 
+
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
@@ -48,12 +49,21 @@
 
   services.mullvad-vpn.enable = true;
 
-  networking.iproute2.enable = true; 
+  networking.iproute2.enable = true;
 
   services = {
     printing.enable = true;
     openssh.enable = true;
     openssh.settings.permitRootLogin = "yes";
+
+    plex.enable = true;
+    plex.user = "robert";
+    plex.openFirewall = true;
+    tautulli.enable = true;
+    tautulli.openFirewall = true;
+
+    transmission.enable = true;
+    transmission.openFirewall = true;
 
     pipewire = {
       enable = true;
@@ -109,6 +119,8 @@
     patchelf
     # remote-utilities-viewer
     nixfmt
+    virtualbox
+    ctags
   ];
 
   fonts.fonts = with pkgs; [

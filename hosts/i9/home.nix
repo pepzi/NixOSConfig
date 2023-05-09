@@ -9,7 +9,7 @@
         vlc
 
         # Apps
-        google-chrome
+        # google-chrome
 
         alacritty
 	vscode

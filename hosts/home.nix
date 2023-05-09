@@ -11,26 +11,29 @@
             # Terminal
             btop
             # pfetch      # minimal fetch
-	    pv		# pipe viewer
-	    fzf
+      	    pv		# pipe viewer
+	          fzf
 
             # Apps
             google-chrome
+#            browserpass
             
             # File Management
             unzip
-	    discord
+      	    discord
             unrar
 
-	    irssi
+            ctags
+	          irssi
         ];
     };
 
     nixpkgs.config.allowUnfree = true;
+#    programs.browserpass.enable = true;
 
 #    imports = [ nix-doom-emacs.hmModule ];
 
-    programs = {
+      programs = {
       home-manager.enable = true;
 #      doom-emacs = {
 #	enable = true;

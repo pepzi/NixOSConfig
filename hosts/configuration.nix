@@ -36,6 +36,13 @@
         shell = pkgs.bash;
     };
 
+    programs.neovim = {
+      vimAlias = true;
+      viAlias = true;
+      enable = true;
+      defaultEditor = true;
+    };
+
     nix = {
         settings = {
             auto-optimise-store = true;
@@ -54,9 +61,10 @@
             VISUAL = "vim";
         };
         systemPackages = with pkgs; [
-            vim 
+            neovim 
             git 
             pciutils
+	    lsof
             usbutils
             killall
             xterm
