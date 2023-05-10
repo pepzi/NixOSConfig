@@ -65,6 +65,7 @@ in
     mako # notification system developed by swaywm maintainer
     wdisplays # tool to configure displays
     wofi
+    wofi-emoji
     foot
     waybar
   ];

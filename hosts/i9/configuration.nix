@@ -47,7 +47,7 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
-  services.mullvad-vpn.enable = true;
+#  services.mullvad-vpn.enable = true;
 
   networking.iproute2.enable = true;
 
@@ -107,7 +107,7 @@
   environment.systemPackages = with pkgs; [
     htop 
     wireguard-tools
-    mullvad-vpn
+    #mullvad-vpn
     btop 
     gh 
     gnupg
@@ -144,6 +144,7 @@
   programs.steam.enable = true;
   programs.fish.enable = true;
   programs.thunar.enable = true;
+  programs.thunar.plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
 
   system.stateVersion = "22.11";
 }
