@@ -24,6 +24,11 @@
   networking = {
     hostName = "i9";
     networkmanager.enable = true;
+    nat = {
+      enable = true;
+      internalInterfaces = [ "virbr0" ];
+      externalInterface = "enp4s0";
+    };
   };
 
 
@@ -46,10 +51,6 @@
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-
-#  services.mullvad-vpn.enable = true;
-
-  networking.iproute2.enable = true;
 
   services = {
     printing.enable = true;
@@ -107,7 +108,6 @@
   environment.systemPackages = with pkgs; [
     htop 
     wireguard-tools
-    #mullvad-vpn
     btop 
     gh 
     gnupg
