@@ -125,7 +125,9 @@
     patchelf
     wofi
     kitty
-    waybar
+    eww-wayland
+    ripgrep
+    xfce.thunar
     # remote-utilities-viewer
 
     # surface things
