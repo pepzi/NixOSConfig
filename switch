@@ -7,6 +7,7 @@ all_hosts=(
     "surface"
 )
 
+hostname="$(hostname)"
 
 # commands-line interface
 print_help () {
@@ -15,21 +16,35 @@ print_help () {
     echo "${pname} - Rebuild NixOS configuration and switch to it"
     echo ""
     echo "USAGE:"
-    echo "  ${pname} hostname"
+    echo "  ${pname}          Builds system with the current hostname"
+    echo "  ${pname} hostname Builds system with specified hostname"
     echo ""
-    echo "FLAGS:"
-    echo "  -h, --help          Prints this help message"
-    echo ""
-    echo "Available hostnames are:"
-    for c in "${all_hosts[@]}"; do
-      echo "    ${c}"
-    done
 }
 
 hosts=()
 
+if [[ ${#} -eq 0 ]] then
+    print_help
+    echo -n "Rebuilding current host ${hostname} in 5"
+    sleep .5
+    echo -n "... 4"
+    sleep .5
+    echo -n "... 3"
+    sleep .5
+    echo -n "... 2"
+    sleep .5
+    echo -n "... 1"
+    sleep .5
+    echo ""
+    echo ""
+
+    hosts+=("${hostname}")
+fi
+
 while [[ ${#} -gt 0 ]]; do
+        echo "am i here?"
     key="${1}"
+
 
     case "${key}" in
         -h|--help)
