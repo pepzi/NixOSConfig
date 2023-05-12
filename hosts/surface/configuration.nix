@@ -4,7 +4,7 @@
   imports =
     [ ./hardware-configuration.nix
       ./vm.nix
-      ../../modules/desktop/plasma
+#      ../../modules/desktop/plasma
 #      ../../modules/desktop/sway
 #      ../../modules/desktop/bspwm
     ];
@@ -123,6 +123,9 @@
     pinentry-curses 
     binutils
     patchelf
+    wofi
+    kitty
+    waybar
     # remote-utilities-viewer
 
     # surface things
@@ -145,6 +148,7 @@
     enableSSHSupport = true;
   };
 
+  programs.hyprland.enable = true;
   programs.dconf.enable = true;
   programs.steam.enable = true;
   programs.fish.enable = true;
