@@ -3,7 +3,7 @@
 {
   imports =
     [ ./hardware-configuration.nix
-      ./vm.nix
+    ./vm.nix
 #      ../../modules/desktop/plasma
       ../../modules/desktop/sway
 #      ../../modules/desktop/bspwm
@@ -24,6 +24,17 @@
   networking = {
     hostName = "i9";
     networkmanager.enable = true;
+
+    firewall = {
+      allowedTCPPorts = [ 2049 ]; # NFSv4
+
+        interfaces."virbr0" = {
+          allowedTCPPortRanges = [ { from = 1; to = 65535; } ];
+          allowedUDPPortRanges = [ { from = 1; to = 65535; } ];
+        };
+    };
+
+
     nat = {
       enable = true;
       internalInterfaces = [ "virbr0" ];
@@ -39,12 +50,12 @@
       wants = [ "graphical-session.target" ];
       after = [ "graphical-session.target" ];
       serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
     };
   };
 
@@ -54,6 +65,7 @@
 
   services = {
     printing.enable = true;
+
     openssh.enable = true;
     openssh.settings.permitRootLogin = "yes";
 
@@ -72,65 +84,76 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-   };
 
-    services.xserver = {
-    enable = true;
+    rpcbind.enable = true;
 
-    extraLayouts.se_a5 =  {
-      description = "Swedish A5";
-      languages = [ "swe" ];
-      symbolsFile = se_a5;
+    nfs.server = {
+      enable = true;
+      exports = ''
+        /mnt/share  192.168.122.0/24(rw,nohide,insecure,no_subtree_check)
+      '';
     };
 
-    layout = "se_a5";
+    xserver = {
+      enable = true;
+
+      extraLayouts.se_a5 =  {
+        description = "Swedish A5";
+        languages = [ "swe" ];
+        symbolsFile = se_a5;
+      };
+
+      layout = "se_a5";
+    };
   };
 
 
-  # users.users.robert = {
-  #   isNormalUser = true;
-  #   description = "Robert";
-  #   extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
-  #   packages = with pkgs; [
-  #     firefox google-chrome
-  #     tmux vscode qbittorrent
-  #   ];
-  # };
+
+# users.users.robert = {
+#   isNormalUser = true;
+#   description = "Robert";
+#   extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+#   packages = with pkgs; [
+#     firefox google-chrome
+#     tmux vscode qbittorrent
+#   ];
+# };
 
   security = {
     doas.enable = true;
     doas.wheelNeedsPassword = false;
     sudo.wheelNeedsPassword = false;
-    };
+  };
 
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    htop 
-    wireguard-tools
-    btop 
-    gh 
-    gnupg
-    unzip 
-    zip 
-    rar 
-    pinentry-curses 
-    binutils
-    patchelf
-    # remote-utilities-viewer
-    nixfmt
-    virtualbox
-    ctags
+      htop
+      wireguard-tools
+      btop
+      gh
+      gnupg
+      unzip
+      zip
+      rar
+      pinentry-curses
+      binutils
+      patchelf
+#     remote-utilities-viewer
+      nixfmt
+      virtualbox
+      ctags
+      eww-wayland
   ];
 
   fonts.fonts = with pkgs; [
     source-code-pro
-    font-awesome
-    fira-code
-    fira-code-symbols
-    nerdfonts
-    roboto
-    emacs-all-the-icons-fonts
+      font-awesome
+      fira-code
+      fira-code-symbols
+      nerdfonts
+      roboto
+      emacs-all-the-icons-fonts
   ];
 
 

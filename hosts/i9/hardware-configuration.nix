@@ -34,6 +34,11 @@
       fsType = "ext4";
     };
 
+  fileSystems."/mnt/share" =
+    { device = "/dev/disk/by-label/share";
+      fsType = "ext4";
+    };
+
   fileSystems."/boot/efi" =
     { device = "/dev/disk/by-uuid/8394-E5AD";
       fsType = "vfat";
