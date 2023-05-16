@@ -153,7 +153,7 @@
       virtualbox
       ctags
       eww-wayland
-      python
+      python311
       wofi
       wl-clipboard
       wdisplays
