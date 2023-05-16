@@ -5,7 +5,7 @@
     [ ./hardware-configuration.nix
     ./vm.nix
 #      ../../modules/desktop/plasma
-      ../../modules/desktop/sway
+#      ../../modules/desktop/sway
 #      ../../modules/desktop/bspwm
     ];
 
@@ -42,6 +42,7 @@
     };
   };
 
+  security.polkit.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -97,6 +98,13 @@
     xserver = {
       enable = true;
 
+      displayManager = {
+        lightdm.enable = true;
+        defaultSession = "hyprland";
+        autoLogin.user = "robert";
+        sddm.enable = false;
+      };
+
       extraLayouts.se_a5 =  {
         description = "Swedish A5";
         languages = [ "swe" ];
@@ -104,6 +112,7 @@
       };
 
       layout = "se_a5";
+      xkbOptions = "caps:swapescape";
     };
   };
 
@@ -144,6 +153,13 @@
       virtualbox
       ctags
       eww-wayland
+      python
+      wofi
+      wl-clipboard
+      wdisplays
+      nordic
+      papirus-icon-theme
+      xdg-utils
   ];
 
   fonts.fonts = with pkgs; [
@@ -163,6 +179,15 @@
     enableSSHSupport = true;
   };
 
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
+
+  programs.hyprland.enable = true;
   programs.dconf.enable = true;
   programs.steam.enable = true;
   programs.fish.enable = true;

@@ -12,20 +12,23 @@
         # google-chrome
 
         alacritty
-	vscode
-	freecad
-	blender
 
-	binutils
+        vscode
 
-	plover.dev
-	oh-my-fish
+      	freecad
+        cura
+      	blender
 
-	tmux
-	emacs
+      	binutils
+
+      	plover.dev
+      	oh-my-fish
+
+      	tmux
+      	emacs
 
 	# doom dependencies
-	binutils       # native-comp needs 'as', provided by this
+      	binutils       # native-comp needs 'as', provided by this
 
 	git
 	(ripgrep.override {withPCRE2 = true;})
