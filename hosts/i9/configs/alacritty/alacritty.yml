@@ -12,6 +12,8 @@ window:
     # Disable border and title bar
     decorations: none
 
+    opacity: 0.85
+
 font:
     normal:
         family: SauceCodePro Nerd Font

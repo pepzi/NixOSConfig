@@ -5,16 +5,16 @@
 
 {
   imports =
-   [ (modulesPath + "/installer/scan/not-detected.nix")
-   ];
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-   boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
+  boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
 
-   # These modules are required for PCI passthrough, and must come before early modesetting stuff
-   boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ]; # "xhci_pci" ];
-   boot.extraModprobeConfig = "options vfio-pci ids=10de:2206,10de:1aef,1987:5012}";
+  # These modules are required for PCI passthrough, and must come before early modesetting stuff
+  boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ]; # "xhci_pci" ];
+  boot.extraModprobeConfig = "options vfio-pci ids=10de:2206,10de:1aef,1987:5012}";
 
-   boot.blacklistedKernelModules = [ "nvidia" "nvidiafb" "nouveau" "nvme" ];
+  boot.blacklistedKernelModules = [ "nvidia" "nvidiafb" "nouveau" "nvme" ];
 
   #  environment.systemPackages = with pkgs; [
   #    virtmanager
@@ -27,7 +27,7 @@
   #  virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
   #  virtualisation.libvirtd.qemu.runAsRoot = false;
 
-    users.groups.libvirtd.members = [ "root" "robert" ];
+  users.groups.libvirtd.members = [ "root" "robert" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/135a6521-ddb6-42d7-83a4-629de0608a3c";

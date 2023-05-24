@@ -1,4 +1,4 @@
- { config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
 
@@ -39,8 +39,8 @@
   services.spice-vdagentd.enable = true;
 
   systemd.tmpfiles.rules = 
-  [
-    "f /dev/shm/looking-glass 0660 robert qemu-libvirtd -"
-  ];
+    [
+      "f /dev/shm/looking-glass 0660 robert qemu-libvirtd -"
+    ];
 
 }

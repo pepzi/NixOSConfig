@@ -1,45 +1,45 @@
 { config, lib, pkgs, user, home-manager, ... }:
 
 {
-    home.packages = with pkgs; [
-        # Video/Audio
-        feh         # image viewer
-        mpv
-        pavucontrol # Audio control
-        vlc
+  home.packages = with pkgs; [
+    feh         # image viewer
+    mpv
+    pavucontrol # Audio control
+    vlc
 
-        # Apps
-        # google-chrome
+    alacritty
+    hyprpaper
+    cliphist
 
-        alacritty
+    #     Applications
+    vscode
+    freecad
+    cura
+    blender
+    spotify
+    qbittorrent
 
-        vscode
+    plover.dev
 
-      	freecad
-        cura
-      	blender
+    tmux
+    oh-my-fish
 
-      	binutils
+    emacs
+    emacsPackages.vterm
 
-      	plover.dev
-      	oh-my-fish
+    #     Doom dependencies
+    binutils            # native-comp needs 'as', provided by this
 
-      	tmux
-      	emacs
+    git
+    (ripgrep.override {withPCRE2 = true;})
+    gnutls              # for TLS connectivity
 
-	# doom dependencies
-      	binutils       # native-comp needs 'as', provided by this
-
-	git
-	(ripgrep.override {withPCRE2 = true;})
-	gnutls              # for TLS connectivity
-
-	## Optional dependencies
-	fd                  # faster projectile indexing
-	#imagemagick         # for image-dired
-        pinentry_emacs   # in-emacs gnupg prompts
-        zstd                # for undo-fu-session/undo-tree compression
-	shellcheck
+    #     Optional Doom dependencies
+    fd                  # faster projectile indexing
+    imagemagick         # for image-dired
+    pinentry_emacs      # in-emacs gnupg prompts
+    zstd                # for undo-fu-session/undo-tree compression
+    shellcheck
   ];
 
   services.mako = {
@@ -47,7 +47,7 @@
     defaultTimeout = 4000;
   };
 
-  home.sessionPath = 
+  home.sessionPath =
     [
       "~/.config/emacs/bin"
     ];
