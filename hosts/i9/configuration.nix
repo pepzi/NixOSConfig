@@ -137,6 +137,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+      retroarchFull
       htop
       wireguard-tools
       btop
@@ -160,6 +161,13 @@
       nordic
       papirus-icon-theme
       xdg-utils
+      nix-index
+      lutris
+      (steam.override { extraPkgs = pkgs: [
+        lutris
+        gamescope
+        mangohud
+      ]; }).run
   ];
 
   fonts.fonts = with pkgs; [
@@ -171,7 +179,6 @@
       roboto
       emacs-all-the-icons-fonts
   ];
-
 
   programs.gnupg.agent = {
     enable = true;
@@ -186,10 +193,22 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
+  programs.gamemode.enable = true;
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-runtime"
+ ];
 
   programs.hyprland.enable = true;
   programs.dconf.enable = true;
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
   programs.fish.enable = true;
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
