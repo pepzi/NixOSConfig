@@ -26,7 +26,9 @@
     networkmanager.enable = true;
 
     firewall = {
-      allowedTCPPorts = [ 2049 ]; # NFSv4
+      allowedTCPPorts = [ 20 21 2049 ]; # 2049 = NFSv4
+      allowedTCPPortRanges = [ { from = 51000; to = 51999; } ]; # vsftpd
+      connectionTrackingModules = [ "ftp" ];
 
         interfaces."virbr0" = {
           allowedTCPPortRanges = [ { from = 1; to = 65535; } ];
@@ -69,6 +71,19 @@
 
     openssh.enable = true;
     openssh.settings.permitRootLogin = "yes";
+
+    vsftpd = {
+      enable = true;
+      writeEnable = true;
+      localUsers = true;
+      userlist = [ "robert" ];
+      userlistEnable = true;
+      extraConfig = ''
+        pasv_enable=Yes
+        pasv_min_port=51000
+        pasv_max_port=51999
+      '';
+    };
 
     plex.enable = true;
     plex.user = "robert";
