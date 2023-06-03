@@ -18,7 +18,8 @@
     blender
     spotify
     qbittorrent
-
+    qalculate-gtk
+    libqalculate
     plover.dev
 
     tmux
