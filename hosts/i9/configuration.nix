@@ -165,6 +165,7 @@
       binutils
       patchelf
 #     remote-utilities-viewer
+      google-chrome
       nixfmt
       virtualbox
       ctags
