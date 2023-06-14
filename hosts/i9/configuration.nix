@@ -26,7 +26,7 @@
     networkmanager.enable = true;
 
     firewall = {
-      allowedTCPPorts = [ 20 21 2049 ]; # 2049 = NFSv4
+      allowedTCPPorts = [ 20 21 8000 2049 ]; # 2049 = NFSv4
       allowedTCPPortRanges = [ { from = 51000; to = 51999; } ]; # vsftpd
       connectionTrackingModules = [ "ftp" ];
 
