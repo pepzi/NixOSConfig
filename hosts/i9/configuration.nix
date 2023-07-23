@@ -166,6 +166,7 @@
       patchelf
 #     remote-utilities-viewer
       google-chrome
+      appimage-run
       nixfmt
       virtualbox
       ctags

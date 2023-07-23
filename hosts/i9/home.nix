@@ -16,6 +16,7 @@
     freecad
     cura
     blender
+    gimp
     spotify
     qbittorrent
     qalculate-gtk
