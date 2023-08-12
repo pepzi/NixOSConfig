@@ -70,7 +70,7 @@
     printing.enable = true;
 
     openssh.enable = true;
-    openssh.settings.permitRootLogin = "yes";
+    openssh.settings.PermitRootLogin = "yes";
 
     vsftpd = {
       enable = true;
@@ -187,15 +187,32 @@
       ]; }).run
   ];
 
-  fonts.fonts = with pkgs; [
-    source-code-pro
-      font-awesome
-      fira-code
-      fira-code-symbols
-      nerdfonts
-      roboto
-      emacs-all-the-icons-fonts
-  ];
+  fonts = {
+    fontconfig = {
+      antialias = true;
+
+      hinting = {
+        enable = true;
+        style = "full";
+        autohint = true;
+      };
+
+      subpixel = {
+        rgba = "rgb";
+        lcdfilter = "default";
+      };
+    };
+
+    fonts = with pkgs; [
+      source-code-pro
+        font-awesome
+        fira-code
+        fira-code-symbols
+        nerdfonts
+        roboto
+        emacs-all-the-icons-fonts
+    ];
+  };
 
   programs.gnupg.agent = {
     enable = true;
@@ -206,7 +223,7 @@
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
+#    wlr.enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
