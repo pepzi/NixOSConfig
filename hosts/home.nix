@@ -15,7 +15,7 @@
 	          fzf
 
             # Apps
-#            google-chrome
+#            #google-chrome
 #            browserpass
             
             # File Management
