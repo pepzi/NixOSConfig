@@ -70,7 +70,7 @@ colors:
         white:   '#5c6370'
 
 mouse:
-    hide_when_typing: true
+    hide_when_typing: false
 
 selection:
     # When set to `true`, selected text will be copied to the primary

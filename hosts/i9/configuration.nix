@@ -203,7 +203,7 @@
       };
     };
 
-    fonts = with pkgs; [
+    packages = with pkgs; [
       source-code-pro
         font-awesome
         fira-code
