@@ -42,7 +42,6 @@ if [[ ${#} -eq 0 ]] then
 fi
 
 while [[ ${#} -gt 0 ]]; do
-        echo "am i here?"
     key="${1}"
 
 
