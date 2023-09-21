@@ -19,9 +19,7 @@
 #            browserpass
             
             # File Management
-            unzip
       	    discord
-            unrar
 
             ctags
 	          irssi

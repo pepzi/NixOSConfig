@@ -74,6 +74,12 @@
       file 
       cached-nix-shell
       tldr
+      xarchiver
+      zip
+      unzip
+      unrar
+      rar
+      p7zip
       neofetch
     ];
   };

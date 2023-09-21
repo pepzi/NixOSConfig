@@ -117,9 +117,6 @@
     btop 
     gh 
     gnupg
-    unzip 
-    zip 
-    rar 
     pinentry-curses 
     binutils
     patchelf
