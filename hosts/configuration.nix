@@ -19,7 +19,7 @@
 
   console.keyMap = "sv-latin1";
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     source-code-pro
     font-awesome
     corefonts

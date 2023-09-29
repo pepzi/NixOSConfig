@@ -28,6 +28,7 @@
 
     emacs
     emacsPackages.vterm
+    ventoy-full
 
     #     Doom dependencies
     binutils            # native-comp needs 'as', provided by this
