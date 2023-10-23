@@ -177,6 +177,7 @@
       xdg-utils
       nix-index
       lutris
+      home-manager
       (steam.override { extraPkgs = pkgs: [
         lutris
         gamescope

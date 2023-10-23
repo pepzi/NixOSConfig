@@ -22,6 +22,7 @@
     qalculate-gtk
     libqalculate
     plover.dev
+    gdb
 
     tmux
     oh-my-fish
