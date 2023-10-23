@@ -7,6 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, nix-doom-emacs, nixos-hardware, ... }: 

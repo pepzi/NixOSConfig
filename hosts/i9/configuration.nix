@@ -21,6 +21,9 @@
     };
   };
 
+  nix.settings = {
+    cores = 5;
+  };
   networking = {
     hostName = "i9";
     networkmanager.enable = true;
