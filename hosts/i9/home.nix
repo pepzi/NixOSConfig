@@ -23,6 +23,7 @@
     libqalculate
     plover.dev
     gdb
+    gcc
 
     tmux
     oh-my-fish
