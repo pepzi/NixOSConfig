@@ -21,6 +21,12 @@
     };
   };
 
+  documentation = {
+    enable = true;
+    man.enable = true;
+    dev.enable = true;
+  };
+
   nix.settings = {
     cores = 5;
   };

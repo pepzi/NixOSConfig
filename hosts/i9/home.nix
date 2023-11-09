@@ -13,7 +13,7 @@
 
     #     Applications
     vscode
-    freecad
+    #freecad
     cura
     blender
     gimp
@@ -24,6 +24,7 @@
     plover.dev
     gdb
     gcc
+    gnumake
 
     tmux
     oh-my-fish
