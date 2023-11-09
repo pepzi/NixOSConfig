@@ -187,11 +187,11 @@
       nix-index
       lutris
       home-manager
-      (steam.override { extraPkgs = pkgs: [
-        lutris
-        gamescope
-        mangohud
-      ]; }).run
+#      (steam.override { extraPkgs = pkgs: [
+#        lutris
+#        gamescope
+#        mangohud
+#      ]; }).run
   ];
 
   fonts = {
@@ -236,11 +236,11 @@
 
   programs.gamemode.enable = true;
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
-    "steam"
-    "steam-original"
-    "steam-runtime"
- ];
+#  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+#    "steam"
+#    "steam-original"
+#    "steam-runtime"
+# ];
 
   programs.hyprland.enable = true;
   programs.dconf.enable = true;
