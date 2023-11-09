@@ -25,6 +25,9 @@
     gdb
     gcc
     gnumake
+    clang-manpages
+    man-pages
+    man-pages-posix
 
     tmux
     oh-my-fish
