@@ -9,7 +9,19 @@
 #      ../../modules/desktop/bspwm
     ];
 
+  specialisation = {
+    gpuPassthrough.configuration = {
+      boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
+
+      boot.extraModprobeConfig = "options vfio-pci ids=10de:2206,10de:1aef,1987:5012}";
+
+      boot.blacklistedKernelModules = [ "nvidia" "nvidiafb" "nouveau" "nvme" ];
+    };
+  };
+
   boot = {
+    kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ]; # "xhci_pci" ];
+
     kernelPackages = pkgs.linuxPackages_latest;
 
     supportedFilesystems = [ "ntfs" ];
@@ -20,6 +32,8 @@
       efi.efiSysMountPoint = "/boot/efi";
     };
   };
+
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 
   documentation = {
     enable = true;
