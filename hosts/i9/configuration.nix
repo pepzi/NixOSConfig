@@ -3,7 +3,7 @@
 {
   imports =
     [ ./hardware-configuration.nix
-    ./vm.nix
+#    ./vm.nix
 #      ../../modules/desktop/plasma
 #      ../../modules/desktop/sway
 #      ../../modules/desktop/bspwm
@@ -16,11 +16,52 @@
       boot.extraModprobeConfig = "options vfio-pci ids=10de:2206,10de:1aef,1987:5012}";
 
       boot.blacklistedKernelModules = [ "nvidia" "nvidiafb" "nouveau" "nvme" ];
+
+      # Enable dconf (System Management Tool)
+      programs.dconf.enable = true;
+
+      # Add user to libvirtd group
+      users.users.robert.extraGroups = [ "libvirtd" "qemu-libvirtd" ];
+      users.groups.libvirtd.members = [ "root" "robert" ];
+      environment.variables = {
+        LIBVIRT_DEFAULT_URI = "qemu:///system";
+      };
+
+      # Install necessary packages
+      environment.systemPackages = with pkgs; [
+        virt-manager
+        virt-viewer
+        spice spice-gtk
+        spice-protocol
+        win-virtio
+        looking-glass-client
+        win-spice
+        gnome.adwaita-icon-theme
+      ];
+
+      # Manage the virtualisation services
+      virtualisation = {
+        libvirtd = {
+          enable = true;
+          qemu = {
+            swtpm.enable = true;
+            ovmf.enable = true;
+            ovmf.packages = [ pkgs.OVMFFull.fd ];
+          };
+        };
+        spiceUSBRedirection.enable = true;
+      };
+      services.spice-vdagentd.enable = true;
+
+      systemd.tmpfiles.rules =
+      [
+        "f /dev/shm/looking-glass 0660 robert qemu-libvirtd -"
+      ];
     };
   };
 
   boot = {
-    kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ]; # "xhci_pci" ];
+#    kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ]; # "xhci_pci" ];
 
     kernelPackages = pkgs.linuxPackages_latest;
 
