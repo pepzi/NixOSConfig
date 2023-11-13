@@ -33,7 +33,7 @@
     };
   };
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
+  powerManagement.cpuFreqGovernor = "performance";
 
   documentation = {
     enable = true;
