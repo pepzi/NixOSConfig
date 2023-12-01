@@ -64,7 +64,7 @@
   security.polkit.enable = true;
 
   systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
+/*    user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
       wantedBy = [ "graphical-session.target" ];
       wants = [ "graphical-session.target" ];
@@ -77,6 +77,7 @@
         TimeoutStopSec = 10;
       };
     };
+*/
   };
 
   sound.enable = true;
@@ -169,6 +170,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+      lxqt.lxqt-policykit
       retroarchFull
       htop
       wireguard-tools
