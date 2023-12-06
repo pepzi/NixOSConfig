@@ -191,6 +191,7 @@
       wofi
       wl-clipboard
       wdisplays
+      vice
       nordic
       papirus-icon-theme
       xdg-utils
