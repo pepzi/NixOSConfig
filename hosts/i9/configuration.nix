@@ -64,6 +64,15 @@
   security.polkit.enable = true;
 
   systemd = {
+    services.on-wakeup-after-hibernate = {
+      description = "Change tty to 7 after wakeup. This is a hack for a problem with Hyprland.";
+      wantedBy = [ "post-resume.target" ];
+      after = [ "post-resume.target" ];
+      script = ''
+        /run/current-system/sw/bin/chvt 7
+      '';
+      serviceConfig.Type = "oneshot";
+    };
 /*    user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
       wantedBy = [ "graphical-session.target" ];
