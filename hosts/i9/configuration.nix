@@ -180,32 +180,33 @@
 
   environment.systemPackages = with pkgs; [
       lxqt.lxqt-policykit
-      retroarchFull
-      htop
+#      retroarchFull
+#      htop
       wireguard-tools
-      btop
-      gh
-      gnupg
+#      btop
+
+#      gh
+#      gnupg
       pinentry-curses
-      binutils
-      patchelf
+#      binutils
+#      patchelf
 #     remote-utilities-viewer
-      google-chrome
+#      google-chrome
       appimage-run
       nixfmt
-      virtualbox
-      ctags
+#      virtualbox
+#      ctags
       eww-wayland
       python311
       wofi
       wl-clipboard
       wdisplays
-      vice
+#      vice
       nordic
       papirus-icon-theme
       xdg-utils
       nix-index
-      lutris
+#      lutris
       home-manager
 #      (steam.override { extraPkgs = pkgs: [
 #        lutris

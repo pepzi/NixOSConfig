@@ -2,53 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    feh         # image viewer
-    mpv
-    pavucontrol # Audio control
-    vlc
-
-    alacritty
-    hyprpaper
-    cliphist
-
-    #     Applications
-    vscode
-    #freecad
-    cura
-    blender
-    gimp
-    spotify
-    qbittorrent
-    qalculate-gtk
-    libqalculate
-    plover.dev
-    gdb
-    gcc
-    gnumake
-    clang-manpages
-    man-pages
-    man-pages-posix
-
-    tmux
-    oh-my-fish
-
-    emacs
-    emacsPackages.vterm
-    ventoy-full
-
-    #     Doom dependencies
-    binutils            # native-comp needs 'as', provided by this
-
-    git
-    (ripgrep.override {withPCRE2 = true;})
-    gnutls              # for TLS connectivity
-
-    #     Optional Doom dependencies
-    fd                  # faster projectile indexing
-    imagemagick         # for image-dired
-    pinentry-emacs      # in-emacs gnupg prompts
-    zstd                # for undo-fu-session/undo-tree compression
-    shellcheck
   ];
 
   services.mako = {
