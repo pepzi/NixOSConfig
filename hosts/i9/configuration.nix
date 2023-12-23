@@ -130,12 +130,12 @@
 
     rpcbind.enable = true;
 
-    nfs.server = {
-      enable = true;
-      exports = ''
-        /mnt/share  192.168.122.0/24(rw,nohide,insecure,no_subtree_check)
-      '';
-    };
+#    nfs.server = {
+#      enable = true;
+#      exports = ''
+#        /mnt/share  192.168.122.0/24(rw,nohide,insecure,no_subtree_check)
+#      '';
+#    };
 
     xserver = {
       enable = true;

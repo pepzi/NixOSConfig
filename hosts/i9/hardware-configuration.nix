@@ -23,10 +23,10 @@
       fsType = "vfat";
     };
 
-  fileSystems."/mnt/share" =
-    { device = "/dev/disk/by-uuid/3f5f63b8-6d2c-43ba-8d9b-0fd0ed4e64c7";
-      fsType = "ext4";
-    };
+#  fileSystems."/mnt/share" =
+#    { device = "/dev/disk/by-uuid/3f5f63b8-6d2c-43ba-8d9b-0fd0ed4e64c7";
+#      fsType = "ext4";
+#    };
 
   swapDevices = [ ];
 
